@@ -5,7 +5,7 @@
 #include <string.h>
 
 char playAgain();
-int compMoveConversion(int rndNoParam);
+char compMoveConversion(int rndNoParam);
 int humanMove();
 int moveAssignInt (char answer);
 int rndNo;
@@ -21,7 +21,7 @@ int random_number(int min, int max) {
 }
 
 //convert rnd no generated into compmove string
-int compMoveConversion (int rndNoParam) {
+char compMoveConversion (int rndNoParam) {
     if (rndNoParam == 1) {
         char compMove[9] = "Rock";
     } else if (rndNoParam == 2) {
@@ -104,11 +104,11 @@ int answerNo;
 int humanMoveChoice;
 
 
-humanMove();
+//humanMove();
 random_number(1, 3);
 moveAssignInt(algoAnswer);
-compare(algoAnswer, rndNo);
-playAgain();
+//  compare(algoAnswer, rndNo);
+//playAgain();
 };
 
 
