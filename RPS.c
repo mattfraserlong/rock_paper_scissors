@@ -8,11 +8,14 @@ char playAgain();
 char compMoveConversion(int rndNoParam);
 int humanMove();
 int moveAssignInt (char answer);
+
+
+char answer;
+int humanMoveChoice;
 int rndNo;
 int algoAnswer;
 
 //generate random number between 1 and 3
-
 int random_number(int min, int max) {
     srand(time(NULL));
    rndNo = (rand() % (max - min + 1)) + min;
@@ -31,28 +34,20 @@ char compMoveConversion (int rndNoParam) {
     }
 }
 
-
-/* accept user input of R P S and turn into number
-
+//accept human move
 int humanMove () {
-printf("Choose Rock, Paper or Scissors. (R, P, or S)");
+printf("Choose Rock, Paper or Scissors. (R, P, or S)\n");
 scanf("%c", &answer);
     if (answer == 'r') {
         humanMoveChoice = 1;
-        return void;
     } else if (answer == 'p') {
-        humanMoveChoice = 1;
-        return void;
+        humanMoveChoice = 2;
     } else if (answer == 's') {
-        humanMoveChoice = 1;
-        return void;
+        humanMoveChoice = 3;
     } else {
-        printf ("You must enter r, p or s\n");
         humanMove();
     }
 }
-
-*/
 
 //input assigned integer value
 
@@ -103,26 +98,9 @@ char answer;
 int answerNo;
 int humanMoveChoice;
 
-
-//humanMove();
+humanMove();
 random_number(1, 3);
 moveAssignInt(algoAnswer);
 //  compare(algoAnswer, rndNo);
 //playAgain();
 };
-
-
-// you need to use vscode debug console... to do this use
-//https://code.visualstudio.com/docs/cpp/launch-json-reference
-// need to create a file structure with a launch json file
-
-
-/*
-#include <stdio.h>
-int main() {
-   // printf() displays the string inside quotation
-   printf("Hello, World!");
-   return 0;
-}
-
-*/
