@@ -8,15 +8,16 @@ char playAgain();
 char compMoveConversion(int rndNoParam);
 int humanMove();
 int moveAssignInt (char answer);
+int answersComparison(char human[9], char computer[9]);
 
 
-int answersComparison;
+
 int rndNo;
 int algoAnswer;
-
 char answer;
 char humanMoveChoice[9];
 char compMove[9];
+int compareAnswer;
 
 
 
@@ -42,7 +43,7 @@ char compMoveConversion (int rndNoParam) {
 }
 
 //Prompt and accept human move
-int humanMove () {
+int humanMove (void) {
 printf("Choose Rock, Paper or Scissors. (R, P, or S)\n");
 scanf("%c", &answer);
     if (answer == 'r') {
@@ -57,7 +58,6 @@ scanf("%c", &answer);
 }
 
 //input assigned integer value
-
 int moveAssignInt (char answer) {
     if (answer == 'R' || answer == 'r') {
         algoAnswer = 1;
@@ -74,30 +74,13 @@ int moveAssignInt (char answer) {
     }
 }
 
-
 // compare user input with computer move
-// think not working as if statement not inside a function
-//therefore syntax wrong... will have to create function
-//rather than assigned fucntion
-
-int answersComparison = strcmp(humanMoveChoice, compMove);
-if (answersComparison == 0) {
-    printf("That's a draw!");
-    humanMove();
+int answersComparison(char human[9], char computer[9]) {
+    int compareAnswer = strcmp(human, computer);
+        if (compareAnswer == 0) {
+        printf("That's a draw!");
+        }
 }
-
-
-// C does not allow string comparison
-//The reason for this is because != and == will only
-//compare the base addresses of those strings.
-//Not the contents of the strings themselves.
-
-//use strcmp function which treats strings as arrays
-//they are and compares each char in the string
-//strcmp(str1, str2) => output is 0 if strings match
-//Or how about just using fact string is char array
-//we CAN just compare first char at address, as just R,P,S?
-// do you want to play again
 
 /*
 char playAgain(void) {
