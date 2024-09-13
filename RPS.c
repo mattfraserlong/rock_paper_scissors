@@ -10,18 +10,12 @@ int humanMove();
 int moveAssignInt (char answer);
 int answersComparison(char human[9], char computer[9]);
 
-
-
 int rndNo;
 int algoAnswer;
 char answer;
 char humanMoveChoice[9];
 char compMove[9];
 int compareAnswer;
-
-
-
-
 
 //generate random number between 1 and 3
 int random_number(int min, int max) {
@@ -33,9 +27,9 @@ int random_number(int min, int max) {
 
 //convert rnd no generated into compmove string
 char compMoveConversion (int rndNoParam) {
-    if (rndNoParam == 1) {
+    if (rndNoParam, 1) {
         strcpy(compMove, "Rock");
-    } else if (rndNoParam == 2) {
+    } else if (rndNoParam, 2) {
         strcpy(compMove, "Paper");
     } else {
         strcpy(compMove, "Scissors");
@@ -46,11 +40,11 @@ char compMoveConversion (int rndNoParam) {
 int humanMove (void) {
 printf("Choose Rock, Paper or Scissors. (R, P, or S)\n");
 scanf("%c", &answer);
-    if (answer == 'r') {
+    if (answer, 'r') {
         strcpy(humanMoveChoice,"Rock");
-    } else if (answer == 'p') {
+    } else if (answer, 'p') {
         strcpy(humanMoveChoice,"Paper");
-    } else if (answer == 's') {
+    } else if (answer, 's') {
         strcpy(humanMoveChoice,"Scissors");
     } else {
         humanMove();
@@ -76,17 +70,41 @@ int moveAssignInt (char answer) {
 
 // compare user input with computer move
 int answersComparison(char human[9], char computer[9]) {
-    int compareAnswer = strcmp(human, computer);
-        if (compareAnswer == 0) {
-        printf("That's a draw!");
-        }
+    if (strcmp(human, "Rock") == 0 && strcmp(computer, "Paper") == 0) {
+        printf("Computer wins");
+        //playAgain();
+    } else if (strcmp(human, "Rock") == 0 && strcmp(computer, "Rock") == 0) {
+        printf("Draw");
+        //playAgain();
+    } else if (strcmp(human, "Rock") ==  0 && strcmp(computer, "Scissors") == 0){
+        printf("Human wins");
+        //playAgain();
+    } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Rock") == 0) {
+        printf("Human wins");
+        //playAgain();
+    } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Paper") == 0) {
+        printf("Draw");
+        //playAgain();   
+    } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Scissors") == 0) {
+        printf("Computer wins");
+        //playAgain();
+    } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Paper") == 0) {
+        printf("Computer wins");
+        //playAgain();
+     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Scissors") == 0) {
+        printf("Draw");
+        //playAgain();
+    } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Rock") == 0) {
+        printf("Computer wins");
+        //playAgain();
+    }
 }
 
 /*
 char playAgain(void) {
     printf ("Do you want to play again (y/n)?\n");
     scanf("%c", &again);
-     if (again == 'y') {
+     if (again, 'y') {
         humanMove();
     } else {
         return printf("Thanks for playing\n");
