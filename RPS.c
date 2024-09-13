@@ -11,11 +11,14 @@ int moveAssignInt (char answer);
 
 
 int answersComparison;
-char answer;
-char humanMoveChoice;
 int rndNo;
 int algoAnswer;
-const char compMove[10];
+
+char answer;
+char humanMoveChoice[9];
+char compMove[9];
+
+
 
 
 
@@ -30,11 +33,11 @@ int random_number(int min, int max) {
 //convert rnd no generated into compmove string
 char compMoveConversion (int rndNoParam) {
     if (rndNoParam == 1) {
-        char compMove[9] = "Rock";
+        strcpy(compMove, "Rock");
     } else if (rndNoParam == 2) {
-        char compMove[9] = "Paper";
+        strcpy(compMove, "Paper");
     } else {
-        char compMove[9] = "Scissors";
+        strcpy(compMove, "Scissors");
     }
 }
 
@@ -43,11 +46,11 @@ int humanMove () {
 printf("Choose Rock, Paper or Scissors. (R, P, or S)\n");
 scanf("%c", &answer);
     if (answer == 'r') {
-        humanMoveChoice = 'r';
+        strcpy(humanMoveChoice,"Rock");
     } else if (answer == 'p') {
-        humanMoveChoice = 'p';
+        strcpy(humanMoveChoice,"Paper");
     } else if (answer == 's') {
-        humanMoveChoice = 's';
+        strcpy(humanMoveChoice,"Scissors");
     } else {
         humanMove();
     }
@@ -77,8 +80,8 @@ int moveAssignInt (char answer) {
 //therefore syntax wrong... will have to create function
 //rather than assigned fucntion
 
-int answersComparison = strcmp(humanMoveChoice, &compMove);
-if (answersComparison == 1) {
+int answersComparison = strcmp(humanMoveChoice, compMove);
+if (answersComparison == 0) {
     printf("That's a draw!");
     humanMove();
 }
