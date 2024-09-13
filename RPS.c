@@ -27,9 +27,9 @@ int random_number(int min, int max) {
 
 //convert rnd no generated into compmove string
 char compMoveConversion (int rndNoParam) {
-    if (rndNoParam, 1) {
+    if (rndNoParam == 1) {
         strcpy(compMove, "Rock");
-    } else if (rndNoParam, 2) {
+    } else if (rndNoParam == 2) {
         strcpy(compMove, "Paper");
     } else {
         strcpy(compMove, "Scissors");
@@ -40,11 +40,11 @@ char compMoveConversion (int rndNoParam) {
 int humanMove (void) {
 printf("Choose Rock, Paper or Scissors. (R, P, or S)\n");
 scanf("%c", &answer);
-    if (answer, 'r') {
+    if (answer == 'r') {
         strcpy(humanMoveChoice,"Rock");
-    } else if (answer, 'p') {
+    } else if (answer == 'p') {
         strcpy(humanMoveChoice,"Paper");
-    } else if (answer, 's') {
+    } else if (answer == 's') {
         strcpy(humanMoveChoice,"Scissors");
     } else {
         humanMove();
@@ -122,4 +122,4 @@ random_number(1, 3);
 moveAssignInt(algoAnswer);
 //  compare(algoAnswer, rndNo);
 //playAgain();
-};
+}
