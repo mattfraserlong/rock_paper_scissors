@@ -8,7 +8,7 @@ char playAgain();
 char compMoveConversion(int rndNoParam);
 int humanMove();
 int moveAssignInt (char answer);
-int answersComparison(char human[9], char computer[9]);
+void char answersComparison(char human[9], char computer[9]);
 
 int rndNo;
 int algoAnswer;
@@ -29,10 +29,13 @@ int random_number(int min, int max) {
 char compMoveConversion (int rndNoParam) {
     if (rndNoParam == 1) {
         strcpy(compMove, "Rock");
+        printf("%s\n", compMove);
     } else if (rndNoParam == 2) {
         strcpy(compMove, "Paper");
+        printf("%s\n", compMove);
     } else {
         strcpy(compMove, "Scissors");
+        printf("%s\n", compMove);
     }
 }
 
@@ -42,10 +45,13 @@ printf("Choose Rock, Paper or Scissors. (R, P, or S)\n");
 scanf("%c", &answer);
     if (answer == 'r') {
         strcpy(humanMoveChoice,"Rock");
+        printf("%s\n", humanMoveChoice);
     } else if (answer == 'p') {
         strcpy(humanMoveChoice,"Paper");
+        printf("%s\n", humanMoveChoice);
     } else if (answer == 's') {
         strcpy(humanMoveChoice,"Scissors");
+        printf("%s\n", humanMoveChoice);
     } else {
         humanMove();
     }
@@ -69,7 +75,7 @@ int moveAssignInt (char answer) {
 }
 
 // compare user input with computer move
-int answersComparison(char human[9], char computer[9]) {
+void char answersComparison(char human[9], char computer[9]) {
     if (strcmp(human, "Rock") == 0 && strcmp(computer, "Paper") == 0) {
         printf("Computer wins");
         //playAgain();
@@ -120,6 +126,6 @@ int humanMoveChoice;
 humanMove();
 random_number(1, 3);
 moveAssignInt(algoAnswer);
-//  compare(algoAnswer, rndNo);
+answersComparison(humanMoveChoice, compMove);
 //playAgain();
 }
