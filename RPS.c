@@ -14,8 +14,8 @@ void random_number(int min, int max);
 int rndNo;
 int algoAnswer;
 char answer;
-char *humanMoveChoice[10];
-char compMove[10];
+char humanMoveChoice[9];
+char compMove[9];
 int compareAnswer;
 char again;
 
@@ -71,10 +71,10 @@ void answersComparison(char *human, char *computer) {
         printf("Draw\n");
         playAgain();
     } else if (strcmp(human, "Rock") ==  0 && strcmp(computer, "Scissors") == 0){
-        printf("Human wins\n");
+        printf("You win\n");
         playAgain();
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Rock") == 0) {
-        printf("Human wins\n");
+        printf("You win\n");
         playAgain();
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Paper") == 0) {
         printf("Draw\n");
@@ -89,12 +89,12 @@ void answersComparison(char *human, char *computer) {
         printf("Draw\n");
         playAgain();
     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Rock") == 0) {
-        printf("Human wins\n");
+        printf("You win\n");
         playAgain();
     }
 }
 
-// play again routine
+// play again
 int playAgain(void) {
     printf ("Do you want to play again (y)?\n");
     scanf(" %c", &again);
