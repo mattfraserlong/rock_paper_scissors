@@ -3,6 +3,9 @@
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ncurses.h>
+#include <errno.h>
+#include <inttypes.h>
 
 int playAgain();
 void compMoveConversion(int rndNoParam);
@@ -19,22 +22,43 @@ char compMove[9];
 int compareAnswer;
 char again;
 
+char mesg[] = "Choose Rock, Paper or Scissors. (R, P, or S): ";
+char *endptr;
+int row, col;
 
-//Prompt and accept human move
+/* Prompt and accept human move */
 void humanMove (void) {
-printf("Choose Rock, Paper or Scissors. (R, P, or S)\n");
-scanf(" %c", &answer);
-    if (answer == 'r') {
+
+char str[5];
+char ans1 = 'r';
+char ans2 = 'p';
+char ans3 = 's';
+char ans4 = 'q';
+
+getmaxyx(stdscr, row, col); /* get the number of rows and columns */
+
+mvprintw(row / 2, (col - (int) strlen(mesg)) / 2, "%s", mesg); /* print the message in Screen centre*/
+
+getstr(str);
+clear();
+
+    if (*str == ans1) {
         strcpy(humanMoveChoice, "Rock");
-        printf("Your move is: %s\n", humanMoveChoice);
-    } else if (answer == 'p') {
+        mvprintw(row / 2, (col - (int) strlen(humanMoveChoice)) / 2, "Your move is: %s", humanMoveChoice);
+        getch();
+    } else if (*str == ans2) {
         strcpy(humanMoveChoice, "Paper");
-        printf("Your move is: %s\n", humanMoveChoice);
-    } else if (answer == 's') {
+        mvprintw(row / 2, (col - (int) strlen(humanMoveChoice)) / 2, "Your move is: %s", humanMoveChoice);
+        getch();
+    } else if (*str == ans3) {
         strcpy(humanMoveChoice, "Scissors");
-        printf("Your move is: %s\n", humanMoveChoice);
+        mvprintw(row / 2, (col - (int) strlen(humanMoveChoice)) / 2, "Your move is: %s", humanMoveChoice);
+        getch();
+    } else if (*str == ans4) {
+        endwin(); // quit ncurses if 'q' entered
     } else {
-        humanMove();
+        getch(); 
+        endwin();
     }
     return random_number(1, 3);
 }
@@ -50,13 +74,19 @@ void random_number(int min, int max) {
 void compMoveConversion (int rndNoParam) {
     if (rndNoParam == 1) {
         strcpy(compMove, "Rock");
-        printf("Computer plays: %s\n", compMove);
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(compMove)) / 2, "%s", compMove);
+        getch();
     } else if (rndNoParam == 2) {
         strcpy(compMove, "Paper");
-        printf("Computer plays: %s\n", compMove);
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(compMove)) / 2, "%s", compMove);
+        getch();
     } else {
         strcpy(compMove, "Scissors");
-        printf("Computer plays: %s\n", compMove);
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(compMove)) / 2, "%s", compMove);
+        getch();
     }
     return answersComparison(humanMoveChoice, compMove);
 }
@@ -64,32 +94,55 @@ void compMoveConversion (int rndNoParam) {
 
 // compare user input with computer move
 void answersComparison(char *human, char *computer) {
+
+    char cWin[20] = "Computer wins\n";
+    char yWin[20] = "You win\n";
+    char draw[20] = "Draw\n";
+
     if (strcmp(human, "Rock") == 0 && strcmp(computer, "Paper") == 0) {
-        printf("Computer wins\n");
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(cWin)) / 2, "%s", cWin);
+        getch();
         playAgain();
     } else if (strcmp(human, "Rock") == 0 && strcmp(computer, "Rock") == 0) {
-        printf("Draw\n");
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(draw)) / 2, "%s", draw);
+        getch();
         playAgain();
     } else if (strcmp(human, "Rock") ==  0 && strcmp(computer, "Scissors") == 0){
-        printf("You win\n");
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(yWin)) / 2, "%s", yWin);
+        getch();
         playAgain();
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Rock") == 0) {
-        printf("You win\n");
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(yWin)) / 2, "%s", yWin);
+        getch();
         playAgain();
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Paper") == 0) {
-        printf("Draw\n");
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(draw)) / 2, "%s", draw);
+        getch();
         playAgain();   
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Scissors") == 0) {
-        printf("Computer wins\n");
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(cWin)) / 2, "%s", cWin);
+        getch();
         playAgain();
     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Paper") == 0) {
-        printf("Computer wins\n");
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(cWin)) / 2, "%s", cWin);
+        getch();
         playAgain();
      } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Scissors") == 0) {
-        printf("Draw\n");
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(draw)) / 2, "%s", draw);
+        getch();
         playAgain();
     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Rock") == 0) {
-        printf("You win\n");
+        clear();
+        mvprintw(row / 2, (col - (int) strlen(yWin)) / 2, "%s", yWin);
+        getch();
         playAgain();
     }
 }
@@ -108,6 +161,8 @@ int playAgain(void) {
 
 
 int main() {
+    initscr();                  /* start the curses mode */
     humanMove();
+    endwin();
     return 0;
 }
