@@ -40,13 +40,13 @@ mvprintw(row / 2, (col - (int) strlen(mesg)) / 2, "%s", mesg); /* print the mess
 getstr(str);
     if (*str == ans1) {
         strcpy(humanMoveChoice, "Rock");
-        mvprintw(row / 1.8, (col - (int) strlen(humanMoveChoice)) / 2, "Your move is: %s", humanMoveChoice);
+        mvprintw(row / 1.8, (col - (int) strlen(humanMoveChoice) - 38) / 2, "Your move is: %s", humanMoveChoice);
     } else if (*str == ans2) {
         strcpy(humanMoveChoice, "Paper");
-        mvprintw(row / 1.8, (col - (int) strlen(humanMoveChoice)) / 2, "Your move is: %s", humanMoveChoice);
+        mvprintw(row / 1.8, (col - (int) strlen(humanMoveChoice) - 36) / 2, "Your move is: %s", humanMoveChoice);
     } else if (*str == ans3) {
         strcpy(humanMoveChoice, "Scissors");
-        mvprintw(row / 1.8, (col - (int) strlen(humanMoveChoice)) / 2, "Your move is: %s", humanMoveChoice);
+        mvprintw(row / 1.8, (col - (int) strlen(humanMoveChoice) - 28) / 2, "Your move is: %s", humanMoveChoice);
     } else if (*str == ans4) {
         endwin(); // quit ncurses if 'q' entered
     } else {
@@ -71,13 +71,13 @@ void compMoveConversion (int rndNoParam) {
 
     if (rndNoParam == 1) {
         strcpy(compMove, "Rock");
-        mvprintw(row / 1.6, (col - (int) strlen(compMove)) / 2, "Computer move is: %s", compMove);
+        mvprintw(row / 1.7, (col - (int) strlen(compMove) - 32) / 2, "Computer move is: %s", compMove);
     } else if (rndNoParam == 2) {
         strcpy(compMove, "Paper");
-        mvprintw(row / 1.6, (col - (int) strlen(compMove)) / 2, " Computer move is: %s", compMove);
+        mvprintw(row / 1.7, (col - (int) strlen(compMove) - 32) / 2, " Computer move is: %s", compMove);
     } else {
         strcpy(compMove, "Scissors");
-        mvprintw(row / 1.6, (col - (int) strlen(compMove)) / 2, "Computer move is: %s", compMove);
+        mvprintw(row / 1.7, (col - (int) strlen(compMove) - 32) / 2, "Computer move is: %s", compMove);
     }
     return answersComparison(humanMoveChoice, compMove);
 }
@@ -92,39 +92,39 @@ void answersComparison(char *human, char *computer) {
     char draw[20] = "Match drawn\n";
 
     if (strcmp(human, "Rock") == 0 && strcmp(computer, "Paper") == 0) {
-        mvprintw(row / 1.4, (col - (int) strlen(cWin)) / 2, "%s", cWin);
+        mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
         getch();
         playAgain();
     } else if (strcmp(human, "Rock") == 0 && strcmp(computer, "Rock") == 0) {
-        mvprintw(row / 1.4, (col - (int) strlen(draw)) / 2, "%s", draw);
+        mvprintw(row / 1.6, (col - (int) strlen(draw) - 28) / 2, "%s", draw);
         getch();
         playAgain();
     } else if (strcmp(human, "Rock") ==  0 && strcmp(computer, "Scissors") == 0){
-        mvprintw(row / 1.4, (col - (int) strlen(yWin)) / 2, "%s", yWin);
+        mvprintw(row / 1.6, (col - (int) strlen(yWin) - 28) / 2, "%s", yWin);
         getch();
         playAgain();
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Rock") == 0) {
-        mvprintw(row / 1.4, (col - (int) strlen(yWin)) / 2, "%s", yWin);
+        mvprintw(row / 1.6, (col - (int) strlen(yWin) - 28) / 2, "%s", yWin);
         getch();
         playAgain();
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Paper") == 0) {
-        mvprintw(row / 1.4, (col - (int) strlen(draw)) / 2, "%s", draw);
+        mvprintw(row / 1.6, (col - (int) strlen(draw) - 28) / 2, "%s", draw);
         getch();
         playAgain();   
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Scissors") == 0) {
-        mvprintw(row / 1.4, (col - (int) strlen(cWin)) / 2, "%s", cWin);
+        mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
         getch();
         playAgain();
     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Paper") == 0) {
-        mvprintw(row / 1.4, (col - (int) strlen(cWin)) / 2, "%s", cWin);
+        mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
         getch();
         playAgain();
      } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Scissors") == 0) {
-        mvprintw(row / 1.4, (col - (int) strlen(draw)) / 2, "%s", draw);
+        mvprintw(row / 1.6, (col - (int) strlen(draw) - 28) / 2, "%s", draw);
         getch();
         playAgain();
     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Rock") == 0) {
-        mvprintw(row / 1.4, (col - (int) strlen(yWin)) / 2, "%s", yWin);
+        mvprintw(row / 1.6, (col - (int) strlen(yWin) - 28) / 2, "%s", yWin);
         getch();
         playAgain();
     }
