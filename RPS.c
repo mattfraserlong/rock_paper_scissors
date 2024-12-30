@@ -8,7 +8,7 @@
 #include <inttypes.h>
 
 //function declarations
-int playAgain(void);
+void playAgain();
 void compMoveConversion(int rndNoParam);
 void humanMove();
 void answersComparison(char *human, char *computer);
@@ -24,7 +24,7 @@ char *endptr;
 int row, col;
 
 /* Prompt and accept human move */
-/* needs validation inpur is r, p or s*/
+/* needs validation input is r, p or s*/
 void humanMove (void) {  
 
 //local variables
@@ -34,6 +34,8 @@ char ans2 = 'p';
 char ans3 = 's';
 char ans4 = 'q';
 char mesg[] = "Choose Rock, Paper or Scissors. (R, P, or S): ";
+char moveMsg[36] = "Your move is: ";
+char yrMove[36];
 
 getmaxyx(stdscr, row, col); /* get the number of rows and columns */
 mvprintw(row / 2, (col - (int) strlen(mesg)) / 2, "%s", mesg); /* print the message in Screen centre*/
@@ -41,13 +43,16 @@ mvprintw(row / 2, (col - (int) strlen(mesg)) / 2, "%s", mesg); /* print the mess
 getstr(str);
     if (*str == ans1) {
         strcpy(humanMoveChoice, "Rock");
-        mvprintw(row / 1.8, (col - (int) strlen(humanMoveChoice) - 38) / 2, "Your move is: %s", humanMoveChoice);
+        strcat(moveMsg, humanMoveChoice);
+        mvprintw(row / 1.8, (col - (int) strlen(moveMsg)) / 2, "%s", moveMsg);
     } else if (*str == ans2) {
         strcpy(humanMoveChoice, "Paper");
-        mvprintw(row / 1.8, (col - (int) strlen(humanMoveChoice) - 36) / 2, "Your move is: %s", humanMoveChoice);
+        strcat(moveMsg, humanMoveChoice);
+        mvprintw(row / 1.8, (col - (int) strlen(moveMsg)) / 2, "%s", moveMsg);
     } else if (*str == ans3) {
         strcpy(humanMoveChoice, "Scissors");
-        mvprintw(row / 1.8, (col - (int) strlen(humanMoveChoice) - 28) / 2, "Your move is: %s", humanMoveChoice);
+        strcat(moveMsg, humanMoveChoice);
+        mvprintw(row / 1.8, (col - (int) strlen(moveMsg)) / 2, "%s", moveMsg);
     }
     return random_number(1, 3);
 }
@@ -65,15 +70,22 @@ void random_number(int min, int max) {
 
 /*convert rnd no generated into compmove string*/
 void compMoveConversion (int rndNoParam) {
+
+    //local variables
+    char moveMsg[36] = "Computer move: ";
+
     if (rndNoParam == 1) {
         strcpy(compMove, "Rock");
-        mvprintw(row / 1.7, (col - (int) strlen(compMove) - 32) / 2, "Computer move is: %s", compMove);
+        strcat(moveMsg, compMove);
+        mvprintw(row / 1.7, (col - (int) strlen(moveMsg)) / 2, "%s", moveMsg);
     } else if (rndNoParam == 2) {
         strcpy(compMove, "Paper");
-        mvprintw(row / 1.7, (col - (int) strlen(compMove) - 32) / 2, " Computer move is: %s", compMove);
+        strcat(moveMsg, compMove);
+        mvprintw(row / 1.7, (col - (int) strlen(moveMsg)) / 2, "%s", moveMsg);
     } else {
         strcpy(compMove, "Scissors");
-        mvprintw(row / 1.7, (col - (int) strlen(compMove) - 32) / 2, "Computer move is: %s", compMove);
+        strcat(moveMsg, compMove);
+        mvprintw(row / 1.7, (col - (int) strlen(moveMsg)) / 2, "%s", moveMsg);
     }
     return answersComparison(humanMoveChoice, compMove);
 }
@@ -99,17 +111,17 @@ void answersComparison(char *human, char *computer) {
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Scissors") == 0) {
         mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Paper") == 0) {
-        mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
+        mvprintw(row / 1.6, (col - (int) strlen(yWin) - 28) / 2, "%s", yWin);
      } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Scissors") == 0) {
         mvprintw(row / 1.6, (col - (int) strlen(draw) - 28) / 2, "%s", draw);
     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Rock") == 0) {
-        mvprintw(row / 1.6, (col - (int) strlen(yWin) - 28) / 2, "%s", yWin);
+        mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
     }
     playAgain();
 }
 
 /*play again*/
-int playAgain(void) {
+void playAgain() {
 
     /*local variables*/
     char againMSG[] = "Do you want to play again (y/any key)?\n";
@@ -131,15 +143,12 @@ int playAgain(void) {
     } else {
         mvprintw(row / 1.2, (col - (int) strlen(endMSG)) / 2, "%s", endMSG);
         getch();
-        endwin();
     }
     endwin();   // end ncurses session
-    return 0;
 }
 
 int main(void) {
     initscr();                  // start the curses mode
     humanMove();
     endwin();
-    return 0;
 }
