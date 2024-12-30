@@ -24,6 +24,7 @@ char *endptr;
 int row, col;
 
 /* Prompt and accept human move */
+/* needs validation inpur is r, p or s*/
 void humanMove (void) {  
 
 //local variables
@@ -47,10 +48,6 @@ getstr(str);
     } else if (*str == ans3) {
         strcpy(humanMoveChoice, "Scissors");
         mvprintw(row / 1.8, (col - (int) strlen(humanMoveChoice) - 28) / 2, "Your move is: %s", humanMoveChoice);
-    } else if (*str == ans4) {
-        endwin(); // quit ncurses if 'q' entered
-    } else {
-        endwin();
     }
     return random_number(1, 3);
 }
@@ -62,13 +59,12 @@ void random_number(int min, int max) {
     int rndNo;
 
     srand(time(NULL));
-   rndNo = (rand() % (max - min + 1)) + min;
-   return compMoveConversion(rndNo);
+    rndNo = (rand() % (max - min + 1)) + min;
+    return compMoveConversion(rndNo);
 }
 
 /*convert rnd no generated into compmove string*/
 void compMoveConversion (int rndNoParam) {
-
     if (rndNoParam == 1) {
         strcpy(compMove, "Rock");
         mvprintw(row / 1.7, (col - (int) strlen(compMove) - 32) / 2, "Computer move is: %s", compMove);
@@ -82,7 +78,6 @@ void compMoveConversion (int rndNoParam) {
     return answersComparison(humanMoveChoice, compMove);
 }
 
-
 /*compare user input with computer move*/
 void answersComparison(char *human, char *computer) {
 
@@ -93,60 +88,54 @@ void answersComparison(char *human, char *computer) {
 
     if (strcmp(human, "Rock") == 0 && strcmp(computer, "Paper") == 0) {
         mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
-        getch();
-        playAgain();
     } else if (strcmp(human, "Rock") == 0 && strcmp(computer, "Rock") == 0) {
         mvprintw(row / 1.6, (col - (int) strlen(draw) - 28) / 2, "%s", draw);
-        getch();
-        playAgain();
     } else if (strcmp(human, "Rock") ==  0 && strcmp(computer, "Scissors") == 0){
         mvprintw(row / 1.6, (col - (int) strlen(yWin) - 28) / 2, "%s", yWin);
-        getch();
-        playAgain();
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Rock") == 0) {
         mvprintw(row / 1.6, (col - (int) strlen(yWin) - 28) / 2, "%s", yWin);
-        getch();
-        playAgain();
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Paper") == 0) {
-        mvprintw(row / 1.6, (col - (int) strlen(draw) - 28) / 2, "%s", draw);
-        getch();
-        playAgain();   
+        mvprintw(row / 1.6, (col - (int) strlen(draw) - 28) / 2, "%s", draw);  
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Scissors") == 0) {
         mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
-        getch();
-        playAgain();
     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Paper") == 0) {
         mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
-        getch();
-        playAgain();
      } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Scissors") == 0) {
         mvprintw(row / 1.6, (col - (int) strlen(draw) - 28) / 2, "%s", draw);
-        getch();
-        playAgain();
     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Rock") == 0) {
         mvprintw(row / 1.6, (col - (int) strlen(yWin) - 28) / 2, "%s", yWin);
-        getch();
-        playAgain();
     }
+    playAgain();
 }
 
 /*play again*/
 int playAgain(void) {
 
-    //local variables
-    char againMSG[] = "Do you want to play again (y)?\n";
+    /*local variables*/
+    char againMSG[] = "Do you want to play again (y/any key)?\n";
     char endMSG[] = "Thanks for playing\n";
+    char trigMSG[] = "Hit any key to play again!\n";
+    char str[5];
 
+    initscr();
+
+    getmaxyx(stdscr, row, col); /* get the number of rows and columns */
     mvprintw(row / 1.2, (col - (int) strlen(againMSG)) / 2, "%s", againMSG);
-    scanf(" %c", &again);
-    if (again == 'y') {
+
+    getstr(str);
+    clear();
+
+    if (*str == 'y') {
+        clear();
         humanMove();
     } else {
         mvprintw(row / 1.2, (col - (int) strlen(endMSG)) / 2, "%s", endMSG);
+        getch();
+        endwin();
     }
+    endwin();   // end ncurses session
     return 0;
 }
-
 
 int main(void) {
     initscr();                  // start the curses mode
