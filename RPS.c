@@ -99,23 +99,23 @@ void answersComparison(char *human, char *computer) {
     char draw[20] = "Match drawn\n";
 
     if (strcmp(human, "Rock") == 0 && strcmp(computer, "Paper") == 0) {
-        mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
+        mvprintw(row / 1.6, (col - (int) strlen(cWin)) / 2, "%s", cWin);
     } else if (strcmp(human, "Rock") == 0 && strcmp(computer, "Rock") == 0) {
-        mvprintw(row / 1.6, (col - (int) strlen(draw) - 28) / 2, "%s", draw);
+        mvprintw(row / 1.6, (col - (int) strlen(draw)) / 2, "%s", draw);
     } else if (strcmp(human, "Rock") ==  0 && strcmp(computer, "Scissors") == 0){
-        mvprintw(row / 1.6, (col - (int) strlen(yWin) - 28) / 2, "%s", yWin);
+        mvprintw(row / 1.6, (col - (int) strlen(yWin)) / 2, "%s", yWin);
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Rock") == 0) {
-        mvprintw(row / 1.6, (col - (int) strlen(yWin) - 28) / 2, "%s", yWin);
+        mvprintw(row / 1.6, (col - (int) strlen(yWin)) / 2, "%s", yWin);
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Paper") == 0) {
-        mvprintw(row / 1.6, (col - (int) strlen(draw) - 28) / 2, "%s", draw);  
+        mvprintw(row / 1.6, (col - (int) strlen(draw)) / 2, "%s", draw);  
     } else if (strcmp(human, "Paper") == 0 && strcmp(computer, "Scissors") == 0) {
-        mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
+        mvprintw(row / 1.6, (col - (int) strlen(cWin)) / 2, "%s", cWin);
     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Paper") == 0) {
-        mvprintw(row / 1.6, (col - (int) strlen(yWin) - 28) / 2, "%s", yWin);
+        mvprintw(row / 1.6, (col - (int) strlen(yWin)) / 2, "%s", yWin);
      } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Scissors") == 0) {
-        mvprintw(row / 1.6, (col - (int) strlen(draw) - 28) / 2, "%s", draw);
+        mvprintw(row / 1.6, (col - (int) strlen(draw)) / 2, "%s", draw);
     } else if (strcmp(human, "Scissors") == 0 && strcmp(computer, "Rock") == 0) {
-        mvprintw(row / 1.6, (col - (int) strlen(cWin) - 28) / 2, "%s", cWin);
+        mvprintw(row / 1.6, (col - (int) strlen(cWin)) / 2, "%s", cWin);
     }
     playAgain();
 }
